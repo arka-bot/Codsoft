@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Calculator</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .calculator {
+            background-color: #000000;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+            width: 300px; 
+        }
+
+        .display {
+            width: calc(100% - 20px); 
+            height: 60px; 
+            margin-bottom: 15px;
+            text-align: right;
+            padding: 10px;
+            font-size: 24px; 
+            border: none;
+            background-color: #5e5c5c;
+            color: #eee;
+            border-radius: 8px;
+            box-sizing: border-box; 
+            overflow: hidden; 
+        }
+
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px; 
+        }
+
+        .button {
+            padding: 18px; 
+            font-size: 20px;
+            border: none;
+            cursor: pointer;
+            background-color: #30c09e; 
+            color: #eee;
+            border-radius: 10px;
+            transition: background-color 0.3s; 
+        }
+
+        .button:hover {
+            background-color: #087f63; 
+        }
+
+        .button:active {
+            background-color: #a0f3d4; 
+        }
+
+        .operator {
+            background-color: #f2a343; 
+            color: white;
+        }
+
+        .operator:hover {
+            background-color: #f08b1c;
+        }
+
+        .equal {
+            background-color: #4caf50; 
+            color: white;
+        }
+        .equal:hover{
+            background-color: #43a047;
+        }
+
+        .clear {
+            background-color: #f44336; 
+            color: white;
+        }
+        .clear:hover{
+            background-color: #d32f2f;
+        }
+    </style>
+</head>
+<body>
+
+<div class="calculator">
+    <input type="text" class="display" id="display" disabled>
+    <div class="buttons">
+        <button class="button" onclick="appendNumber('7')">7</button>
+        <button class="button" onclick="appendNumber('8')">8</button>
+        <button class="button" onclick="appendNumber('9')">9</button>
+        <button class="button operator" onclick="operation('/')">/</button>
+        <button class="button" onclick="appendNumber('4')">4</button>
+        <button class="button" onclick="appendNumber('5')">5</button>
+        <button class="button" onclick="appendNumber('6')">6</button>
+        <button class="button operator" onclick="operation('*')">*</button>
+        <button class="button" onclick="appendNumber('1')">1</button>
+        <button class="button" onclick="appendNumber('2')">2</button>
+        <button class="button" onclick="appendNumber('3')">3</button>
+        <button class="button operator" onclick="operation('-')">-</button>
+        <button class="button" onclick="appendNumber('0')">0</button>
+        <button class="button clear" onclick="clearDisplay()">C</button>
+        <button class="button equal" onclick="calculateResult()">=</button>
+        <button class="button operator" onclick="operation('+')">+</button>
+    </div>
+</div>
+
+<script>
+    function appendNumber(number) {
+        document.getElementById('display').value += number;
+    }
+
+    function operation(operator) {
+        document.getElementById('display').value += ' ' + operator + ' ';
+    }
+
+    function clearDisplay() {
+        document.getElementById('display').value = '';
+    }
+
+    function calculateResult() {
+        let expression = document.getElementById('display').value;
+        try {
+            // Use a safer eval alternative if possible in a production environment.
+            // For example, a math.js library could be used.
+            document.getElementById('display').value = eval(expression);
+        } catch (error) {
+            document.getElementById('display').value = 'Error';
+            console.error("Calculation Error:", error); // Log the error for debugging
+        }
+    }
+</script>
+
+</body>
+</html>
